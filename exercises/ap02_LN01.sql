@@ -1,0 +1,28 @@
+/*
+  Lesson 02 - Expressions, NULL, conversion, and formatting
+  Student:
+  Class:
+  Date:
+*/
+
+USE ULHT_DB26;
+GO
+
+SELECT EMPLOYEE_ID,
+       CONCAT(LAST_NAME, ', ', FIRST_NAME) AS full_name,
+       REPLACE(LOWER(CONCAT(LEFT(FIRST_NAME, 1), '.', LAST_NAME)),' ','_') AS login_name
+FROM HR.EMPLOYEES;
+
+SELECT e.EMPLOYEE_ID,e.SALARY,e.COMMISSION_PCT, e.SALARY * (1+ISNULL(e.COMMISSION_PCT,0)) AS 'TOTAL'
+    FROM HR.EMPLOYEES AS e
+
+SELECT TRY_CONVERT(INT, '2703') AS valid_number,
+       TRY_CONVERT(INT, '27O3') AS invalid_number;    
+
+SELECT EMPLOYEE_ID, SALARY,
+       FORMAT(SALARY, 'N3', 'pt-CV') AS salary_display
+FROM HR.EMPLOYEES;       
+
+SELECT FORMAT(DATEADD(MONTH,6,CAST(GETDATE() AS DATE)),'MMMM dd yy','zh-CN')
+
+SELECT FORMAT(e.SALARY,'00#,###.00') FROM HR.EMPLOYEES AS e
