@@ -1,0 +1,37 @@
+SELECT CAST(0.1 AS DATETIME)
+
+DROP TABLE HR.employee_training;
+
+IF OBJECT_ID('HR.employee_training','U') IS NULL
+CREATE TABLE HR.employee_training (
+    employee_id INT NOT NULL,
+    course_code VARCHAR(12) NOT NULL,
+    completed_on DATE NULL,
+    score DECIMAL(5, 2) NULL
+);
+
+SELECT * FROM INFORMATION_SCHEMA.TABLES t WHERE t.TABLE_SCHEMA = 'HR' AND t.TABLE_NAME = 'employee_training'
+
+SELECT EMPLOYEE_ID, JOB_ID, COMMISSION_PCT, SALARY,
+       CASE WHEN SALARY >= 10000 THEN 'Senior band'
+            ELSE 'Core band'
+       END AS salary_band
+FROM HR.EMPLOYEES
+WHERE JOB_ID = 'SA_REP'
+  AND COMMISSION_PCT IS NOT NULL
+  AND COMMISSION_PCT >= 0.25;
+GO
+  CREATE VIEW vw_exemplo 
+  AS
+  SELECT EMPLOYEE_ID, JOB_ID, COMMISSION_PCT, SALARY,
+       CASE WHEN SALARY >= 10000 THEN 'Senior band'
+            ELSE 'Core band'
+       END AS salary_band
+FROM HR.EMPLOYEES
+WHERE JOB_ID = 'SA_REP'
+  AND COMMISSION_PCT IS NOT NULL
+  AND COMMISSION_PCT >= 0.25;
+
+GO  
+
+SELECT * FROM vw_exemplo
